@@ -9,6 +9,7 @@ This kit installs:
 - global Claude instructions in `~/.claude/CLAUDE.md`
 - global Claude hooks in `~/.claude/settings.json`
 - a shared memory runtime in `~/.agent-memory/`
+- a local VS Code auto-resume extension in `~/.vscode/extensions/agent-memory-kit.auto-resume-0.0.1`
 
 ## What It Does
 
@@ -18,6 +19,7 @@ This kit installs:
 - creates a separate manual notes file for each project
 - gives both Codex and Claude a common resume command:
   - `~/.agent-memory/project-context.sh`
+- refreshes a workspace-local `.agent-memory/startup-context.md` automatically when VS Code opens a folder
 
 ## Important Limitation
 
@@ -50,6 +52,13 @@ This prints:
 - current summary snapshot
 - recent project memory
 
+When VS Code opens a workspace, the bundled auto-resume extension also refreshes:
+
+- `.agent-memory/startup-context.md`
+- `.agent-memory/startup-context.json`
+
+Those files are meant to be the freshest "what were we doing?" snapshot for Codex and Claude sessions started after the editor opens.
+
 ## Cascade-Style Resume Pattern
 
 If you want the experience to feel closer to Cascade, add these repository-level files:
@@ -62,9 +71,24 @@ If you want the experience to feel closer to Cascade, add these repository-level
 The updated templates in this kit tell both Codex and Claude to:
 
 - run `~/.agent-memory/project-context.sh` first
+- read `.agent-memory/startup-context.md` first when it exists
 - use `scripts/resume-context.sh` when present
 - open `SESSION.md` and `docs/session-handoff.md`
 - restate the recovered last active task and next step before asking the user to repeat context
+
+## VS Code Auto-Resume
+
+The bundled VS Code helper is a lightweight local extension that activates on editor startup.
+
+For each opened workspace folder it:
+
+- runs `~/.agent-memory/project-context.sh`
+- runs `./scripts/resume-context.sh` if the repository provides it
+- writes a combined snapshot to `.agent-memory/startup-context.md`
+- writes metadata to `.agent-memory/startup-context.json`
+- adds `.agent-memory/` to the repo-local git exclude file when the workspace is a git repository
+
+If you update the extension files manually, reload VS Code once so it reactivates with the new version.
 
 ## Files
 

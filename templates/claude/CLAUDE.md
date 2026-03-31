@@ -7,6 +7,7 @@ or imported `AGENTS.md` provides more specific guidance.
 
 - Read project instructions first when a repository includes `CLAUDE.md`, `AGENTS.md`, or a handoff document.
 - At the start of a new session or when resuming work, run `~/.agent-memory/project-context.sh` from the current repository before asking the user to restate context.
+- If `.agent-memory/startup-context.md` exists in the repository, read it first as the freshest auto-generated resume snapshot.
 - If the repository has `scripts/resume-context.sh`, `SESSION.md`, or `docs/session-handoff.md`, use them immediately after `project-context.sh`.
 - In the first working reply, explicitly restate the recovered last active task and immediate next step.
 - Prefer minimal-risk edits and respect work already in progress.
@@ -17,6 +18,7 @@ or imported `AGENTS.md` provides more specific guidance.
 
 - Use project handoff files as the primary durable context.
 - Use `~/.agent-memory/projects/*.md` as per-project breadcrumbs and resume context.
+- Treat `.agent-memory/startup-context.md` as the freshest workspace-open snapshot when available.
 - Prefer a compact repo-level `SESSION.md` for cascade-style resume when a project provides one.
 - Treat hook logs and auto memory as supporting context.
 - Keep notes concise and actionable.

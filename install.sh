@@ -4,6 +4,7 @@ set -eu
 ROOT_DIR=$(CDPATH= cd -- "$(dirname "$0")" && pwd)
 
 mkdir -p "$HOME/.codex" "$HOME/.claude" "$HOME/.agent-memory" "$HOME/.agent-memory/projects"
+mkdir -p "$HOME/.vscode/extensions"
 
 cp "$ROOT_DIR/templates/codex/AGENTS.md" "$HOME/.codex/AGENTS.md"
 cp "$ROOT_DIR/templates/codex/hooks.json" "$HOME/.codex/hooks.json"
@@ -32,5 +33,11 @@ if [ ! -f "$HOME/.agent-memory/projects/README.md" ]; then
   cp "$ROOT_DIR/templates/agent-memory/projects-README.md" "$HOME/.agent-memory/projects/README.md"
 fi
 
+AUTO_RESUME_DIR="$HOME/.vscode/extensions/agent-memory-kit.auto-resume-0.0.1"
+rm -rf "$AUTO_RESUME_DIR"
+mkdir -p "$AUTO_RESUME_DIR"
+cp -R "$ROOT_DIR/templates/vscode-auto-resume/." "$AUTO_RESUME_DIR/"
+
 echo "Installed Agent Memory Kit."
 echo "Try: ~/.agent-memory/project-context.sh"
+echo "Installed VS Code auto-resume helper: $AUTO_RESUME_DIR"

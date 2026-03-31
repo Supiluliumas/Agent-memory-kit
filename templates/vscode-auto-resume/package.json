@@ -1,0 +1,25 @@
+{
+  "name": "agent-memory-kit-auto-resume",
+  "displayName": "Agent Memory Kit Auto Resume",
+  "description": "Refreshes per-workspace memory context when VS Code starts.",
+  "version": "0.0.1",
+  "publisher": "supiluliumas",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "agentMemoryKit.refreshWorkspaceContext",
+        "title": "Agent Memory Kit: Refresh Workspace Context"
+      }
+    ]
+  }
+}
