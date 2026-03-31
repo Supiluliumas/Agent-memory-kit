@@ -46,8 +46,25 @@ This prints:
 - per-project summary path
 - per-project notes path
 - candidate handoff files found in the repo
+- an explicit resume snapshot with current goal and immediate next step when those sections are available
 - current summary snapshot
 - recent project memory
+
+## Cascade-Style Resume Pattern
+
+If you want the experience to feel closer to Cascade, add these repository-level files:
+
+- `AGENTS.md` for Codex-specific startup rules
+- `CLAUDE.md` for Claude-specific startup rules
+- `SESSION.md` as a short "continue from here" file
+- optional `scripts/resume-context.sh` to print a project-specific startup summary
+
+The updated templates in this kit tell both Codex and Claude to:
+
+- run `~/.agent-memory/project-context.sh` first
+- use `scripts/resume-context.sh` when present
+- open `SESSION.md` and `docs/session-handoff.md`
+- restate the recovered last active task and next step before asking the user to repeat context
 
 ## Files
 
